@@ -92,11 +92,21 @@ bool isLose(char player, vector<string> board, int r, int c)
     return false;
 }
 
+int calValue(char player, vector<string> board, int r, int c)
+{
+    int ret = 0;
+    if (r == c)
+        ret = 100;
+
+    return ret;
+}
+    
 /* Complete the function below to print 2 integers separated by a single space which will be your next move 
    */
 void nextMove(char player, vector <string> board){
     int nr, nc;
-
+    int curValue = -1;
+    int temp;
     for (int r = 0; r < 3; ++r)
     {
         for (int c = 0; c < 3; ++c)
@@ -111,10 +121,11 @@ void nextMove(char player, vector <string> board){
                 cout<<r<<" "<<c<<endl;
                 return;
             }
-            else
+            else if((temp = calValue(player, board, r,c)) > curValue)
             {
-               nr = r;
-               nc = c;
+                curValue = temp;
+                nr = r;
+                nc = c;
             }
         }
     }
